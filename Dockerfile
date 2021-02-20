@@ -6,7 +6,8 @@ RUN apt-get update -y && \
 
 RUN apt-get install -y wget gnupg git \
     build-essential bison ccache \
-    gcc make binutils util-linux
+    gcc make binutils flex \
+    libelf-dev libssl-dev bc util-linux
 
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
 RUN echo "deb http://apt.llvm.org/focal/ llvm-toolchain-focal main" | tee /etc/apt/sources.list.d/clang-llvm.list
@@ -16,3 +17,5 @@ RUN apt-get -y update && \
 
 RUN apt-get autoremove -y && \
     apt-get -y autoclean
+
+LABEL author="Zaw Zaw <zaw.z.thein@frontiir.net"
