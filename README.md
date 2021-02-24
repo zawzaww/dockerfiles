@@ -1,12 +1,12 @@
-# Linux Clang Docker Contianer Image
+# Linux Kernel Docker Image
 
-## Customized Docker Image for Compiling Linux Kernel with Clang/LLVM
+## Customized Docker Image for Compiling Linux with Clang and Booting Linux in QEMU
 
 Docker Hub: [https://hub.docker.com/r/zawzaww/linux](https://hub.docker.com/r/zawzaww/linux)
 
 Personally, I'm using this Docker contianer image for compiling and building Linux stable kernel tree. Installed minimal required packages and Clang C compiler/toolchain as prebuilt container image based on ubuntu linux docker image for compiling Linux kernel with Clang/LLVM.
 
-### Download Built Docker Image
+### Download Prebuilt Docker Image
 
 You can pull this Docker image with Docker CLI:
 
@@ -18,24 +18,16 @@ docker pull zawzaww/linux:latest
 
 If you want to build Docker image with Dockerfile locally,
 
-Git clone this repository with SSH:
+Git clone this repository:
 
 ```bash
-git clone git@github.com:zawzaww/linux-clang-img.git
-```
-
-(OR)
-
-Git clone this repository with HTTPS:
-
-```bash
-git clone https://github.com/zawzaww/linux-clang-img.git
+git clone https://github.com/zawzaww/linux-kernel-docker.git linux-kernel-docker
 ```
 
 Build Docker image with Dockerfile locally:
 
 ```bash
-cd linux-clang-img
+cd linux-kernel-docker
 ```
 
 ```bash
