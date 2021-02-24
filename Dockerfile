@@ -1,21 +1,29 @@
-# Docker Container Base Image
-FROM ubuntu:latest
+# Docker Container Base Image.
+FROM zawzaww/linux:latest
 
-RUN apt-get update -y && \
-    apt-get upgrade -y
+# Setup environment variables.
+ENV KERNEL_USER=zawzaw \
+    KERNEL_COMPILER=clang \
+    KERNEL_BUILDTOOL=make \
+    KERNEL_REPOSITORY=linux \
+    KERNEL_WORKDIR=/linux
 
-RUN apt-get install -y wget gnupg git \
-    build-essential bison \
-    gcc make binutils bc flex \
-    libelf-dev libssl-dev
+# Download Linux kernel stable source code and Create Linux workdir.
+RUN git clone --depth=1 https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git ${KERNEL_REPOSITORY}
+WORKDIR ${KERNEL_WORKDIR}
 
-RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
-RUN echo "deb http://apt.llvm.org/focal/ llvm-toolchain-focal main" | tee /etc/apt/sources.list.d/clang-llvm.list
+# Add a new user for Linux workdir.
+RUN useradd --create-home ${KERNEL_USER}
 
-RUN apt-get -y update && \
-    apt-get install -y clang
+# Change owner for Linux workdir.
+RUN chown -R ${KERNEL_USER}:${KERNEL_USER} ${KERNEL_WORKDIR}
+USER ${KERNEL_USER}
 
-RUN apt-get autoremove -y && \
-    apt-get -y autoclean
+# Check Clang/LLVM compiler and Make version.
+RUN ${KERNEL_COMPILER} --version && \
+    ${KERNEL_BUILDTOOL} --version
 
-LABEL author="Zaw Zaw <zaw.z.thein@frontiir.net"
+# Make kernel configurations and Compile Linux kernel.
+CMD make clean && make mrproper && \
+    make CC=${KERNEL_COMPILER} x86_64_defconfig && \
+    make CC=${KERNEL_COMPILER} -j$(nproc --all)
