@@ -26,4 +26,9 @@ RUN ${KERNEL_COMPILER} --version && \
 # Make kernel configurations and Compile Linux kernel.
 CMD make clean && make mrproper && \
     make CC=${KERNEL_COMPILER} x86_64_defconfig && \
-    make CC=${KERNEL_COMPILER} -j$(nproc --all)
+    make CC=${KERNEL_COMPILER} -j$(nproc --all) && \
+    qemu-system-x86_64 \
+    -kernel arch/x86_64/boot/bzImage \
+    -append "console=ttyS0" \
+    -nographic \
+    -serial mon:stdio
