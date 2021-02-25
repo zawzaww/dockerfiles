@@ -27,6 +27,6 @@ CMD make clean && make mrproper && \
     make CC=${KERNEL_COMPILER} -j$(nproc --all) && \
     qemu-system-x86_64 \
     -kernel arch/x86_64/boot/bzImage \
-    -append "console=ttyS0" \
+    -append "root=/dev/zero console=ttyS0" \
     -nographic \
     -serial mon:stdio
