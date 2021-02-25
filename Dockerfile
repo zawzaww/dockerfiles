@@ -1,15 +1,13 @@
 # Docker Container Base Image.
-FROM zawzaww/linux:latest
+FROM zawzaww/debian-linux:stable
 
 # Setup environment variables.
 ENV KERNEL_USER=zawzaw \
     KERNEL_COMPILER=clang \
     KERNEL_BUILDTOOL=make \
-    KERNEL_REPOSITORY=linux \
     KERNEL_WORKDIR=/linux
 
-# Download Linux kernel stable source code and Create Linux workdir.
-RUN git clone --depth=1 https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git ${KERNEL_REPOSITORY}
+# Setup Linux workdir.
 WORKDIR ${KERNEL_WORKDIR}
 
 # Add a new user for Linux workdir.
@@ -23,7 +21,7 @@ USER ${KERNEL_USER}
 RUN ${KERNEL_COMPILER} --version && \
     ${KERNEL_BUILDTOOL} --version
 
-# Make kernel configurations and Compile Linux kernel.
+# Compile and Boot Linux kernel in QEMU.
 CMD make clean && make mrproper && \
     make CC=${KERNEL_COMPILER} x86_64_defconfig && \
     make CC=${KERNEL_COMPILER} -j$(nproc --all) && \
