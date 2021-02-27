@@ -52,16 +52,19 @@ Docker Hub: [https://hub.docker.com/r/zawzaww/linux-kernel](https://hub.docker.c
 
 ```
 
-Personally, I'm using this Docker contianer image for compiling and building Linux stable kernel tree. Docker Container base image `base-image/Dockerfile` contains Clang/LLVM compiler toolchian and required build tools packages as prebuilt Docker container image based on Debian GNU/Linux image for compiling Linux kernel with Clang/LLVM toolchain. Main Dockerfile `$PROJECT_ROOT/Dockerfile` is automated Docker image for compiling Linux kernel, booting and running kernel image in QEMU emulator and virtualizer.
+
+Personally, I'm using this Docker contianer image for compiling and building Linux kernel stable tree. Docker Container base image `base-image/Dockerfile` contains Clang/LLVM compiler toolchian and required build tools packages as prebuilt Docker container image based on Debian GNU/Linux image for compiling Linux kernel with Clang/LLVM toolchain. Main Dockerfile `$PROJECT_ROOT/Dockerfile` is automated Docker image for compiling Linux kernel, booting and running kernel image in QEMU emulator and virtualizer.
 
 
 ### Project Structure
 
 ```base-image/Dockerfile```
-> Docker base image contains Clang/LLVM toolchain and build tools for compiling Linux kernel.
+
+- Docker base image contains Clang/LLVM toolchain and build tools for compiling Linux kernel.
 
 ```Dockerfile```
-> Automated Docker image for compiling Linux kernel with Clang/LLVM, booting and running kernel image in QEMU emulator and virtalizer.
+
+- Automated Docker image for compiling Linux kernel with Clang/LLVM, booting and running kernel image in QEMU emulator and virtalizer.
 
 
 ### Download from Docker Hub and Run Docker Image
