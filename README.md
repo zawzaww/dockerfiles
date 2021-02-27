@@ -9,9 +9,11 @@ Personally, I'm using this Docker contianer image for compiling and building Lin
 
 ### Project Structure
 
-```base-image/Dockerfile``` > Docker base image contains Clang/LLVM toolchain and build tools for compiling Linux kernel.
+```base-image/Dockerfile```
+> Docker base image contains Clang/LLVM toolchain and build tools for compiling Linux kernel.
 
-```Dockerfile``` > Automated Docker image for compiling Linux kernel, booting and running kernel image in QEMU emulator and virtualizer.
+```Dockerfile```
+> Automated Docker image for compiling Linux kernel with Clang/LLVM, booting and running kernel image in QEMU emulator and virtalizer.
 
 
 ### Download from Docker Hub and Run Docker Image
